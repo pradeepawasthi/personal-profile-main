@@ -26,6 +26,10 @@
   NEXT_TELEMETRY_DISABLED = "1"
   # Enable Netlify's build cache for node_modules + .next/cache (fixes "No build cache" warning)
   NETLIFY_NEXT_PLUGIN_SKIP = "false"
+  # Force install of devDependencies (Netlify sets NODE_ENV=production which
+  # would otherwise cause yarn to skip devDeps like tailwind/postcss/autoprefixer).
+  NPM_CONFIG_PRODUCTION = "false"
+  YARN_PRODUCTION = "false"
 
 # Official Netlify plugin that adds SSR + API-route support for Next.js.
 # It automatically wires app/api/[[...path]]/route.js into Netlify Functions.
