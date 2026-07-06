@@ -24,6 +24,8 @@
   YARN_VERSION = "1.22.22"
   # Skip Next.js telemetry during CI build
   NEXT_TELEMETRY_DISABLED = "1"
+  # Enable Netlify's build cache for node_modules + .next/cache (fixes "No build cache" warning)
+  NETLIFY_NEXT_PLUGIN_SKIP = "false"
 
 # Official Netlify plugin that adds SSR + API-route support for Next.js.
 # It automatically wires app/api/[[...path]]/route.js into Netlify Functions.
