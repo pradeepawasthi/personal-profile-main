@@ -1,0 +1,55 @@
+# Netlify configuration for Next.js 15 App Router + MongoDB
+# ------------------------------------------------------------
+# Docs: https://docs.netlify.com/frameworks/next-js/overview/
+#
+# Prereqs before you deploy:
+#   1. Push this repo to GitHub
+#   2. In Netlify UI -> Site settings -> Environment variables, add:
+#        MONGO_URL             = <your MongoDB Atlas connection string>
+#        DB_NAME               = portfolio
+#        NEXT_PUBLIC_BASE_URL  = https://<your-site>.netlify.app
+#   3. Import the repo in Netlify -> Deploy
+
+[build]
+  # Netlify auto-detects Next.js, but we set it explicitly for safety.
+  command = "yarn install --frozen-lockfile && yarn build"
+  publish = ".next"
+
+[build.environment]
+  # Node runtime for the build container
+  NODE_VERSION = "20"
+  # Yarn version used locally
+  YARN_VERSION = "1.22.22"
+  # Skip Next.js telemetry during CI build
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Official Netlify plugin that adds SSR + API-route support for Next.js.
+# It automatically wires app/api/[[...path]]/route.js into Netlify Functions.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# ------------------------------------------------------------
+# Security & caching headers
+# ------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+    Permissions-Policy     = "camera=(), microphone=(), geolocation=()"
+
+# Cache the built Next.js static assets aggressively (they are hashed)
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ------------------------------------------------------------
+# Optional: per-context overrides (useful for preview deploys)
+# ------------------------------------------------------------
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "production"
