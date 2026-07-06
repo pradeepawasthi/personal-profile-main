@@ -128,25 +128,48 @@ function Hero() {
               transition={{ duration: 0.7, delay: 0.3 }}
               className="relative animate-floaty"
             >
-              <div className="absolute -inset-6 bg-gradient-to-br from-cyan-500/30 via-fuchsia-500/20 to-transparent blur-3xl animate-pulse-glow" />
-              <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900/80 to-slate-950/80 p-6 backdrop-blur">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="h-3 w-3 rounded-full bg-red-400/70" />
-                  <div className="h-3 w-3 rounded-full bg-amber-400/70" />
-                  <div className="h-3 w-3 rounded-full bg-emerald-400/70" />
-                  <div className="ml-3 text-xs text-slate-500 font-mono">pradeep@ai-agents</div>
-                </div>
-                <div className="font-mono text-sm space-y-2">
-                  <div><span className="text-cyan-400">$</span> <span className="text-slate-300">whoami</span></div>
-                  <div className="text-slate-400 pl-4">senior_engineering_manager</div>
-                  <div><span className="text-cyan-400">$</span> <span className="text-slate-300">skills --list</span></div>
-                  <div className="text-fuchsia-300 pl-4">DevSecOps · Cloud · AI Agents · Automation</div>
-                  <div><span className="text-cyan-400">$</span> <span className="text-slate-300">agents --deployed</span></div>
-                  <div className="text-emerald-300 pl-4">6 agents shipping value 24×7</div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-cyan-400">$</span>
-                    <span className="inline-block h-4 w-2 bg-cyan-300 animate-pulse" />
+              {/* Animated glow behind */}
+              <div className="absolute -inset-8 bg-gradient-to-br from-cyan-500/40 via-fuchsia-500/30 to-blue-500/20 blur-3xl animate-pulse-glow" />
+
+              {/* Photo card with gradient border */}
+              <div className="relative rounded-3xl p-[2px] bg-gradient-to-br from-cyan-400 via-fuchsia-500 to-blue-500 shadow-2xl">
+                <div className="relative rounded-[calc(1.5rem-2px)] overflow-hidden bg-slate-950">
+                  <img
+                    src={profile.photo}
+                    alt={profile.name}
+                    className="w-full h-auto object-cover"
+                  />
+                  {/* Dark bottom fade for label readability */}
+                  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent" />
+                  {/* Name plate */}
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <div className="flex items-center gap-3">
+                      <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <div className="text-xs uppercase tracking-widest text-emerald-300">
+                        Available for consulting
+                      </div>
+                    </div>
+                    <div className="mt-2 text-xl font-semibold text-white">
+                      {profile.name}
+                    </div>
+                    <div className="text-sm text-slate-300">
+                      Senior Engineering Manager · AI Agents Builder
+                    </div>
                   </div>
+                </div>
+              </div>
+
+              {/* Floating badge chips */}
+              <div className="absolute -left-4 top-8 hidden lg:block">
+                <div className="rounded-xl border border-white/10 bg-slate-900/80 backdrop-blur px-3 py-2 shadow-xl">
+                  <div className="text-[10px] uppercase tracking-widest text-cyan-300">14+ yrs</div>
+                  <div className="text-xs text-slate-300">Engineering Leadership</div>
+                </div>
+              </div>
+              <div className="absolute -right-4 bottom-24 hidden lg:block">
+                <div className="rounded-xl border border-white/10 bg-slate-900/80 backdrop-blur px-3 py-2 shadow-xl">
+                  <div className="text-[10px] uppercase tracking-widest text-fuchsia-300">6 AI Agents</div>
+                  <div className="text-xs text-slate-300">Shipping 24×7</div>
                 </div>
               </div>
             </motion.div>
