@@ -370,14 +370,14 @@ function Contact() {
     }
     setSending(true);
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error('Failed');
-      toast.success("Message received! Pradeep will get back to you within 24h.");
-      setForm({ name: '', email: '', message: '' });
+      // Open the user's email client with a pre-filled draft — no backend / DB required
+      const subject = encodeURIComponent(`Portfolio contact from ${form.name}`);
+      const body = encodeURIComponent(
+        `Hi Pradeep,\n\n${form.message}\n\n\u2014 ${form.name} (${form.email})`
+      );
+      window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+      toast.success('Opening your email client... just hit Send!');
+      setTimeout(() => setForm({ name: '', email: '', message: '' }), 800);
     } catch {
       toast.error('Something went wrong. Please email directly: ' + profile.email);
     } finally {

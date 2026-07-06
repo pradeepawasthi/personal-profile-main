@@ -1,13 +1,15 @@
-# Netlify configuration for Next.js 15 App Router + MongoDB
+# Netlify configuration for Next.js 15 App Router
 # ------------------------------------------------------------
 # Docs: https://docs.netlify.com/frameworks/next-js/overview/
+#
+# This portfolio has NO database dependency — the contact form opens
+# the visitor's email client via mailto:. So Netlify env-vars are minimal.
 #
 # Prereqs before you deploy:
 #   1. Push this repo to GitHub
 #   2. In Netlify UI -> Site settings -> Environment variables, add:
-#        MONGO_URL             = <your MongoDB Atlas connection string>
-#        DB_NAME               = portfolio
 #        NEXT_PUBLIC_BASE_URL  = https://<your-site>.netlify.app
+#        CORS_ORIGINS          = *
 #   3. Import the repo in Netlify -> Deploy
 
 [build]
