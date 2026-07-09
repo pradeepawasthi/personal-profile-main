@@ -5,15 +5,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   Sparkles, ShieldCheck, Cloud, TestTube, Users,
-  Mail, Phone, Linkedin, Github, ArrowRight, Download,
-  MapPin, Send, Copy, Check, GitBranch, Bug, LineChart,
+  Mail, Linkedin, Github, ArrowRight, Download,
+  MapPin, Copy, Check, GitBranch, Bug, LineChart,
   ServerCog, Wallet, Stethoscope, ChevronRight, Star, Zap,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 
 import {
@@ -54,7 +52,7 @@ function Nav() {
           ))}
         </nav>
         <Button asChild size="sm" className="bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-slate-950 hover:opacity-90 font-medium">
-          <a href="#contact">Connect for Demo <ArrowRight className="ml-1 h-4 w-4" /></a>
+          <a href="#contact">Contact <ArrowRight className="ml-1 h-4 w-4" /></a>
         </Button>
       </div>
     </header>
@@ -97,8 +95,8 @@ function Hero() {
                 <a href="#projects">Explore AI Agents <ArrowRight className="ml-2 h-4 w-4" /></a>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white/15 hover:bg-white/5">
-                <a href={`mailto:${profile.email}?subject=Demo request&body=Hi Pradeep, I'd love to see a demo of your AI agents.`}>
-                  <Mail className="mr-2 h-4 w-4" /> Book a Demo
+                <a href={`mailto:${profile.email}`}>
+                  <Mail className="mr-2 h-4 w-4" /> Email Me
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10">
@@ -153,7 +151,7 @@ function Hero() {
                       {profile.name}
                     </div>
                     <div className="text-sm text-slate-300">
-                      Senior Engineering Manager · AI Agents Builder
+                      Senior Engineering Manager · DevSecOps & Cloud
                     </div>
                   </div>
                 </div>
@@ -230,8 +228,8 @@ function About() {
 
 function Skills() {
   return (
-    <Section id="skills" eyebrow="Capabilities" title="Full-stack engineering leadership."
-      subtitle="Everything from AI agents to team scaling — organized so you can hire the exact skill you need.">
+    <Section id="skills" eyebrow="Capabilities" title="Engineering Leadership."
+      subtitle="Everything from AI agents to team scaling — organized by domain.">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {skills.map((cat, idx) => {
           const Icon = ICONS[cat.icon] || Sparkles;
@@ -358,32 +356,7 @@ function Experience() {
 }
 
 function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [sending, setSending] = useState(false);
   const [copied, setCopied] = useState(false);
-
-  const submit = async (e) => {
-    e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      toast.error('Please fill in all fields');
-      return;
-    }
-    setSending(true);
-    try {
-      // Open the user's email client with a pre-filled draft — no backend / DB required
-      const subject = encodeURIComponent(`Portfolio contact from ${form.name}`);
-      const body = encodeURIComponent(
-        `Hi Pradeep,\n\n${form.message}\n\n\u2014 ${form.name} (${form.email})`
-      );
-      window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-      toast.success('Opening your email client... just hit Send!');
-      setTimeout(() => setForm({ name: '', email: '', message: '' }), 800);
-    } catch {
-      toast.error('Something went wrong. Please email directly: ' + profile.email);
-    } finally {
-      setSending(false);
-    }
-  };
 
   const copyEmail = async () => {
     await navigator.clipboard.writeText(profile.email);
@@ -393,73 +366,48 @@ function Contact() {
   };
 
   return (
-    <Section id="contact" eyebrow="Get in touch" title="Let's build the next agent together."
-      subtitle="Want a walkthrough of any AI agent, or planning a DevSecOps transformation? Drop a message.">
-      <div className="grid md:grid-cols-5 gap-6">
-        <Card className="md:col-span-2 bg-white/[0.02] border-white/10">
-          <CardContent className="p-6 space-y-5">
-            <div>
-              <div className="text-sm text-slate-400 mb-1">Email</div>
-              <button onClick={copyEmail} className="flex items-center gap-2 text-slate-100 hover:text-cyan-300 transition group">
-                {profile.email}
-                {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 opacity-60 group-hover:opacity-100" />}
-              </button>
-            </div>
-            <div>
-              <div className="text-sm text-slate-400 mb-1">Phone</div>
-              <a href={`tel:${profile.phone}`} className="text-slate-100 hover:text-cyan-300">{profile.phone}</a>
-            </div>
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Button asChild variant="outline" size="sm" className="border-white/15 hover:bg-white/5">
-                <a href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin className="mr-2 h-4 w-4" /> LinkedIn</a>
-              </Button>
-              <Button asChild variant="outline" size="sm" className="border-white/15 hover:bg-white/5">
-                <a href={profile.github} target="_blank" rel="noreferrer"><Github className="mr-2 h-4 w-4" /> GitHub</a>
-              </Button>
-              <Button asChild variant="outline" size="sm" className="border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10">
-                <a href={profile.resumeUrl} target="_blank" rel="noreferrer" download><Download className="mr-2 h-4 w-4" /> Resume</a>
-              </Button>
-            </div>
-            <div className="pt-4 border-t border-white/10">
-              <Button asChild className="w-full bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-slate-950 hover:opacity-90">
-                <a href={`mailto:${profile.email}?subject=Demo request for AI Agent&body=Hi Pradeep, I'd love to see a demo of your AI agents.`}>
-                  <Mail className="mr-2 h-4 w-4" /> Email Directly
-                </a>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="md:col-span-3 bg-white/[0.02] border-white/10">
-          <CardContent className="p-6">
-            <form onSubmit={submit} className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm text-slate-400 mb-1.5 block">Your Name</label>
-                  <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="bg-white/[0.03] border-white/10 focus-visible:ring-cyan-400" placeholder="Jane Doe" />
-                </div>
-                <div>
-                  <label className="text-sm text-slate-400 mb-1.5 block">Your Email</label>
-                  <Input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="bg-white/[0.03] border-white/10 focus-visible:ring-cyan-400" placeholder="jane@company.com" />
-                </div>
+    <section id="contact" className="relative py-20 md:py-28">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mx-auto text-center mb-10">
+          <div className="text-sm font-medium text-cyan-300 uppercase tracking-widest mb-3">Get in touch</div>
+        </div>
+        <div className="max-w-2xl mx-auto">
+          <Card className="bg-white/[0.02] border-white/10">
+            <CardContent className="p-8 space-y-6">
+              <div>
+                <div className="text-sm text-slate-400 mb-1">Email</div>
+                <button onClick={copyEmail} className="flex items-center gap-2 text-lg text-slate-100 hover:text-cyan-300 transition group">
+                  {profile.email}
+                  {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 opacity-60 group-hover:opacity-100" />}
+                </button>
               </div>
               <div>
-                <label className="text-sm text-slate-400 mb-1.5 block">Message</label>
-                <Textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="bg-white/[0.03] border-white/10 focus-visible:ring-cyan-400 min-h-[140px]"
-                  placeholder="Tell me about your project, team, or which agent you want a demo of..." />
+                <div className="text-sm text-slate-400 mb-1">Phone</div>
+                <a href={`tel:${profile.phone}`} className="text-lg text-slate-100 hover:text-cyan-300">{profile.phone}</a>
               </div>
-              <Button type="submit" disabled={sending}
-                className="w-full bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-slate-950 hover:opacity-90 font-medium">
-                {sending ? 'Sending...' : (<><Send className="mr-2 h-4 w-4" /> Send Message</>)}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Button asChild variant="outline" size="sm" className="border-white/15 hover:bg-white/5">
+                  <a href={profile.linkedin} target="_blank" rel="noreferrer"><Linkedin className="mr-2 h-4 w-4" /> LinkedIn</a>
+                </Button>
+                <Button asChild variant="outline" size="sm" className="border-white/15 hover:bg-white/5">
+                  <a href={profile.github} target="_blank" rel="noreferrer"><Github className="mr-2 h-4 w-4" /> GitHub</a>
+                </Button>
+                <Button asChild variant="outline" size="sm" className="border-cyan-400/40 text-cyan-200 hover:bg-cyan-400/10">
+                  <a href={profile.resumeUrl} target="_blank" rel="noreferrer" download><Download className="mr-2 h-4 w-4" /> Resume</a>
+                </Button>
+              </div>
+              <div className="pt-4 border-t border-white/10">
+                <Button asChild className="w-full bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-slate-950 hover:opacity-90">
+                  <a href={`mailto:${profile.email}`}>
+                    <Mail className="mr-2 h-4 w-4" /> Email Me
+                  </a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }
 

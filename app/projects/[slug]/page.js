@@ -74,11 +74,6 @@ const ProjectPage = () => {
               </div>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-slate-950 hover:opacity-90 font-medium">
-                <a href={`mailto:${profile.email}?subject=Demo request: ${project.name}&body=Hi Pradeep, I'd love a live demo of ${project.name}.`}>
-                  <Mail className="mr-2 h-4 w-4" /> Request a Live Demo
-                </a>
-              </Button>
               <Button asChild size="lg" variant="outline" className="border-white/15 hover:bg-white/5">
                 <Link href="/#projects">See All Agents <ChevronRight className="ml-1 h-4 w-4" /></Link>
               </Button>
@@ -153,16 +148,6 @@ const ProjectPage = () => {
                     </span>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
-            <Card className="bg-gradient-to-br from-cyan-500/10 to-fuchsia-500/10 border-cyan-400/20 mt-4">
-              <CardContent className="p-5">
-                <div className="text-sm text-slate-200 mb-3">Want to see this agent in action?</div>
-                <Button asChild className="w-full bg-gradient-to-r from-cyan-400 to-fuchsia-500 text-slate-950 hover:opacity-90">
-                  <a href={`mailto:${profile.email}?subject=Demo: ${project.name}`}>
-                    <Mail className="mr-2 h-4 w-4" /> Book a demo
-                  </a>
-                </Button>
               </CardContent>
             </Card>
           </div>
