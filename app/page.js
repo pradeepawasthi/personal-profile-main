@@ -141,13 +141,7 @@ function Hero() {
                   <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent" />
                   {/* Name plate */}
                   <div className="absolute inset-x-0 bottom-0 p-5">
-                    <div className="flex items-center gap-3">
-                      <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <div className="text-xs uppercase tracking-widest text-emerald-300">
-                        Available for consulting
-                      </div>
-                    </div>
-                    <div className="mt-2 text-xl font-semibold text-white">
+                    <div className="text-xl font-semibold text-white">
                       {profile.name}
                     </div>
                     <div className="text-sm text-slate-300">
@@ -197,7 +191,7 @@ function Section({ id, eyebrow, title, subtitle, children }) {
 
 function About() {
   return (
-    <Section id="about" eyebrow="About" title="Engineering leader turned AI-agent builder."
+    <Section id="about" eyebrow="About" title="Engineering Leader — Quality Engineering & DevSecOps."
       subtitle="14+ years of shipping secure, scalable, cost-optimized platforms — now amplified with agentic AI.">
       <div className="grid md:grid-cols-3 gap-6">
         <div className="md:col-span-2 space-y-4 text-slate-300 leading-relaxed">
@@ -270,7 +264,7 @@ function Projects() {
   };
   return (
     <Section id="projects" eyebrow="AI Agents" title="Autonomous agents shipping real business value."
-      subtitle="Click any agent to see the problem, solution, features, tech stack — and connect for a live demo.">
+      subtitle="Click any agent to see the problem, solution, features, and tech stack.">
       {Object.entries(grouped).map(([cat, items]) => (
         <div key={cat} className="mb-14">
           <div className="flex items-center gap-3 mb-6">
